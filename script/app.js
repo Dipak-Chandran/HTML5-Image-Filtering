@@ -33,7 +33,11 @@ Canvas.filters = [
 		{
 			"id":7,
 			"name":"Brighten"
-		}
+		},
+		{
+			"id":8,
+			"name":"Invert"
+		},
 	];
 
 Canvas.prototype.readImage = function(img){
@@ -77,7 +81,7 @@ Canvas.prototype.applyFilter = function(filter){
 				break;
 			case 8:
 				this.orginal();
-				this.matrix();
+				this.invert();
 				break;
 		}
 	}
@@ -153,49 +157,14 @@ Canvas.prototype.brighten = function(x){
 	}
 	this.writeImage(d);
 }
+Canvas.prototype.invert = function(){
+	var d = this.ctx.getImageData(0,0,this.canvas.width,this.canvas.height);
 
-Canvas.prototype.matrix = function(){
-	var imgMatrix = [[0,0,0],[0,0,0],[0,0,0]];
-	for(var i=2; i<this.canvas.width-2; i++){
-		for(var j=2; j<this.canvas.height-2; j++){
-			
-			imgMatrix[0][0] =	this.ctx.getImageData(i-1,j-1, i-1,j-1);
-			imgMatrix[0][1] =	this.ctx.getImageData(i-1,j, i-1,j);
-			imgMatrix[0][2] =	this.ctx.getImageData(i-1,j+1, i-1,j+1);
-
-			imgMatrix[1][0] =	this.ctx.getImageData(i,j-1, i,j-1);
-			imgMatrix[1][1] =	this.ctx.getImageData(i,j, i,j);
-			imgMatrix[1][2] =	this.ctx.getImageData(i,j+1, i,j+1);
-				
-			imgMatrix[2][0] =	this.ctx.getImageData(i+1,j-1, i+1,j+1);
-			imgMatrix[2][1] =	this.ctx.getImageData(i+1,j, i+1,j);
-			imgMatrix[2][2] =	this.ctx.getImageData(i+1,j+1, i+1,j+1);
-			console.log(imgMatrix);
-			// imgMatrix = this.multiplyMatrix(imgMatrix,this.sharpenMatrix);
-
-			// this.ctx.putImageData(imgMatrix[0][0], i-1,j-1);
-			// this.ctx.putImageData(imgMatrix[0][1], i-1,j);
-			// this.ctx.putImageData(imgMatrix[0][2], i-1,j+1);
-
-			// this.ctx.putImageData(imgMatrix[1][0], i,j-1);
-			// this.ctx.putImageData(imgMatrix[1][1], i,j);
-			// this.ctx.putImageData(imgMatrix[1][2], i,j+1);
-
-			// this.ctx.putImageData(imgMatrix[2][0], i+1,j-1);
-			// this.ctx.putImageData(imgMatrix[2][1], i+1,j);
-			// this.ctx.putImageData(imgMatrix[2][2], i+1,j+1);
-		}
+	for( var i=0; i<d.data.length; i+=4){
+		var r = d.data[i], g = d.data[i+1], b = d.data[i+2], a = d.data[i+3];
+		d.data[i] = 255 - r;
+		d.data[i+1] = 255 -g;
+		d.data[i+2] = 255 -b;
 	}
-}
-
-Canvas.prototype.sharpenMatrix = [[ 0, -2,  0],[-2, 11, -2],[ 0, -2,  0]];
-
-Canvas.prototype.multiplyMatrix = function(a,b){
-	var res = [[0,0,0],[0,0,0],[0,0,0]];
-	for(var i1=0;i1<3;i1++){
-		for(var j1=0; j1<3; j1++){
-			res[i1][j1] =+ a[i1][j1]*b[j1][i1];
-		}
-	}
-	return res;
+	this.writeImage(d);	
 }
