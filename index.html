@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Image Processing</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <script type="text/javascript" src="script/app.js"></script>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="400" height="300"></canvas>
+    <div id="imgContainer">
+    </div>
+
+    <div id="filterContainer">
+    </div>
+    
+
+    <script type="text/javascript">
+        var app = new Canvas();
+
+        //Create img elements
+        for (var i = 1 ; i < 6 ; i++) {
+          var src = "resources\\img-"+i+".jpg";
+          var img = document.createElement("img");
+          img.src = src;
+          img.onclick = function(){
+            app.readImage(this);
+          }
+          img.crossOrigin = "anonymous";
+          document.getElementById("imgContainer").appendChild(img);
+        }; 
+
+        //List filters
+        for( var i = 0; i<app.getFilters().length; i++){
+          var filter = document.createElement("p");
+          filter.innerHTML = app.getFilters()[i].name;
+          filter.setAttribute("filterID",app.getFilters()[i].id);
+          filter.onclick = function(){
+            app.applyFilter(this);
+          }
+          document.getElementById("filterContainer").appendChild(filter);
+        }
+    </script>
+  </body>
+</html>   

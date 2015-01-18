@@ -1,0 +1,42 @@
+body{
+	background-color: #eee;
+	text-align: center;
+}
+
+canvas#myCanvas {
+	background-color: #FFF;
+	box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.07);
+}
+
+div#imgContainer{
+
+}
+
+div#imgContainer img{
+	width: 200px;
+	margin: 0px 5px;
+	box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.72);
+	cursor: pointer;
+	border-radius: 50%;
+	transition: all 1s;
+}
+div#imgContainer img:hover{
+	border-radius: 0px;
+}
+
+div#filterContainer{}
+div#filterContainer p{
+	margin: 5px;
+	padding: 5px;
+	background-color: #2CA866;
+	display: inline-block;
+	font-family: monospace;
+	color: #FFFFFF;
+	cursor: pointer;
+	font-size: 12pt;
+	min-width: 100px;
+	transition: all .25s;
+}
+div#filterContainer p:hover{
+	box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.72);
+}
