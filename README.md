@@ -3,4 +3,4 @@ Filtering a image, loaded into HTML5 Canvas, using its pixel values into differe
 
 View Functionality over this link:
 
-https://cdn.rawgit.com/Dipak-Chandran/HTML5-Image-Filtering/master/index.html
+https://cdn.rawgit.com/Dipak-Chandran/HTML5-Image-Filtering/master/index-v1.0.html
