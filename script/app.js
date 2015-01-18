@@ -37,7 +37,7 @@ Canvas.filters = [
 		{
 			"id":8,
 			"name":"Invert"
-		},
+		}
 	];
 
 Canvas.prototype.readImage = function(img){
