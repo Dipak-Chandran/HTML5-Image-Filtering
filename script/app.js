@@ -33,10 +33,6 @@ Canvas.filters = [
 		{
 			"id":7,
 			"name":"Brighten"
-		},
-		{
-			"id":8,
-			"name":"Matrix"
 		}
 	];
 
